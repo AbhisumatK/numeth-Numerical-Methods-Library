@@ -9,7 +9,7 @@ description = "A comprehensive set of core numerical methods used in engineering
 readme = "README.md"
 authors = [{ name = "Abhisumat Kundu", email = "kunduabhisumat@gmail.com" }]
 license = { file = "LICENSE" }
-keywords = ["numerical methods", "scientific computing", "engineering", "applied mathematics"]
+keywords = ["numerical methods", "scientific computing", "engineering", "applied mathematics", "numerical", "numeric"]
 dependencies = ["numpy"]
 requires-python = ">=3.8"
 classifiers = [
@@ -19,6 +19,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/example/numeth"
-"Repository" = "https://github.com/example/numeth.git"
-"Documentation" = "https://numeth.readthedocs.io"
+"Repository" = "https://github.com/AbhisumatK/numeth-Numerical-Methods-Library"
+
