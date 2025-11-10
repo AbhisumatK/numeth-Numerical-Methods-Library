@@ -66,7 +66,7 @@ print(f"Root: {root}, Iterations: {iterations}, Converged: {converged}")
 
 ## How to Contribute or Report Issues
 
-Contributions are welcome! Please submit pull requests or open issues on the [GitHub repository](https://github.com/example/numeth).
+Contributions are welcome! Please submit pull requests or open issues on the [GitHub repository]([https://github.com/example/numeth](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library)).
 
 ## License
 
