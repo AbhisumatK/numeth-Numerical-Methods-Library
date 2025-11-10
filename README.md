@@ -1,3 +1,8 @@
+![numeth Logo](numeth.jpg)  
+[![PyPI version](https://badge.fury.io/py/numeth.svg)](https://badge.fury.io/py/numeth)
+[![PyPI downloads](https://img.shields.io/pypi/dm/numeth.svg)](https://pypistats.org/packages/numeth)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library/blob/main/LICENSE)
+
 # numeth
 
 A fully functional Python package implementing core numerical methods for engineering and applied mathematics. Designed for usability and educational clarity.
@@ -66,7 +71,7 @@ print(f"Root: {root}, Iterations: {iterations}, Converged: {converged}")
 
 ## How to Contribute or Report Issues
 
-Contributions are welcome! Please submit pull requests or open issues on the [GitHub repository](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library).
+Contributions are welcome! Please submit pull requests or open issues on the [GitHub repository](https://github.com/example/numeth).
 
 ## License
 
