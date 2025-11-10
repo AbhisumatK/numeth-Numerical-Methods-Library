@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "numeth"
+version = "0.1.0"
+description = "A comprehensive set of core numerical methods used in engineering and applied mathematics"
+readme = "README.md"
+authors = [{ name = "Abhisumat Kundu", email = "kunduabhisumat@gmail.com" }]
+license = { file = "LICENSE" }
+keywords = ["numerical methods", "scientific computing", "engineering", "applied mathematics"]
+dependencies = ["numpy"]
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/example/numeth"
+"Repository" = "https://github.com/example/numeth.git"
+"Documentation" = "https://numeth.readthedocs.io"
