@@ -1,4 +1,7 @@
-![numeth Logo](numeth.jpg)  
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AbhisumatK/numeth-Numerical-Methods-Library/main/numeth.jpg" alt="numeth Logo" width="200">
+</p>
+      
 [![PyPI version](https://badge.fury.io/py/numeth.svg)](https://badge.fury.io/py/numeth)
 [![PyPI downloads](https://img.shields.io/pypi/dm/numeth.svg)](https://pypistats.org/packages/numeth)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library/blob/main/LICENSE)
