@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/AbhisumatK/numeth-Numerical-Methods-Library/main/numeth.jpg" alt="numeth Logo" width="300">
 </p>
-      
+
 [![PyPI version](https://badge.fury.io/py/numeth.svg)](https://badge.fury.io/py/numeth)
 [![PyPI downloads](https://img.shields.io/pypi/dm/numeth.svg)](https://pypistats.org/packages/numeth)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library/blob/main/LICENSE)
@@ -35,6 +35,36 @@ root, iterations, converged = newton_raphson(f, df, x0=1.0, tol=1e-6, max_iter=1
 print(f"Root: {root}, Iterations: {iterations}, Converged: {converged}")
 # Output: Root: 1.414213562373095, Iterations: 4, Converged: True
 ```
+
+## Visualization
+
+You can easily visualize the convergence or the results of any numerical method using the `.graph()` method.
+
+```python
+import numeth
+
+# Integration visualization
+tr = numeth.trapezoidal(lambda x: x**2, 0, 1)
+tr.graph()
+
+# Root finding visualization
+sol = numeth.bisection(lambda x: x**2 - 2, 0, 2)
+sol.graph()
+```
+
+The `.graph()` method provides a visual representation of how the algorithm works, including function plots, integration areas, root markers, and tangent lines for differentiation.
+
+### Supported Methods for Visualization
+Visualization is currently supported for almost all modules:
+- **Integration**: All methods supported.
+- **Root Finding**: All methods supported.
+- **Differentiation**: All methods supported.
+- **Interpolation**: All methods supported.
+- **Optimization**: All methods supported.
+
+*Note: Linear Algebra methods (Gauss Elimination, LU Decomposition, Jacobi, Gauss-Seidel) currently do not support `.graph()` because they operate on vectors/matrices rather than single-variable functions.*
+
+
 
 ## Supported Methods
 
@@ -74,8 +104,9 @@ print(f"Root: {root}, Iterations: {iterations}, Converged: {converged}")
 
 ## How to Contribute or Report Issues
 
-Contributions are welcome! Please submit pull requests or open issues on the [GitHub repository]([https://github.com/example/numeth](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library)).
+Contributions are welcome! Please submit pull requests or open issues on the [GitHub repository](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/AbhisumatK/numeth-Numerical-Methods-Library/blob/main/LICENSE) file for details.
+

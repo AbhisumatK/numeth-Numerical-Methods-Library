@@ -1,5 +1,7 @@
 import math
 from typing import Callable, Optional
+from .results import NumericalResult
+
 
 try:
     import numpy as np
@@ -11,7 +13,7 @@ def _has_numpy() -> bool:
     return np is not None
 
 
-def trapezoidal(f: Callable[[float], float], a: float, b: float) -> float:
+def trapezoidal(f: Callable[[float], float], a: float, b: float) -> NumericalResult:
     """
     Single trapezoidal rule for numerical integration.
 
@@ -33,7 +35,8 @@ def trapezoidal(f: Callable[[float], float], a: float, b: float) -> float:
     if a >= b:
         raise ValueError("Lower bound a must be less than upper bound b")
     h = b - a
-    return (h / 2) * (f(a) + f(b))
+    result = (h / 2) * (f(a) + f(b))
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'trapezoidal', 'f': f, 'a': a, 'b': b})
 
 
 def composite_trapezoidal(
@@ -66,10 +69,11 @@ def composite_trapezoidal(
     integral = f(a) + f(b)
     for i in range(1, n):
         integral += 2 * f(a + i * h)
-    return (h / 2) * integral
+    result = (h / 2) * integral
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'composite_trapezoidal', 'f': f, 'a': a, 'b': b, 'n': n})
 
 
-def simpsons_13(f: Callable[[float], float], a: float, b: float) -> float:
+def simpsons_13(f: Callable[[float], float], a: float, b: float) -> NumericalResult:
     """
     Single Simpson's 1/3 rule for numerical integration.
 
@@ -91,7 +95,8 @@ def simpsons_13(f: Callable[[float], float], a: float, b: float) -> float:
     if a >= b:
         raise ValueError("Lower bound a must be less than upper bound b")
     h = (b - a) / 2
-    return (h / 3) * (f(a) + 4 * f(a + h) + f(b))
+    result = (h / 3) * (f(a) + 4 * f(a + h) + f(b))
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'simpsons_13', 'f': f, 'a': a, 'b': b})
 
 
 def composite_simpsons_13(
@@ -126,10 +131,11 @@ def composite_simpsons_13(
         integral += 4 * f(a + i * h)
     for i in range(2, n, 2):
         integral += 2 * f(a + i * h)
-    return (h / 3) * integral
+    result = (h / 3) * integral
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'composite_simpsons_13', 'f': f, 'a': a, 'b': b, 'n': n})
 
 
-def simpsons_38(f: Callable[[float], float], a: float, b: float) -> float:
+def simpsons_38(f: Callable[[float], float], a: float, b: float) -> NumericalResult:
     """
     Simpson's 3/8 rule for numerical integration.
 
@@ -151,10 +157,11 @@ def simpsons_38(f: Callable[[float], float], a: float, b: float) -> float:
     if a >= b:
         raise ValueError("Lower bound a must be less than upper bound b")
     h = (b - a) / 3
-    return (3 * h / 8) * (f(a) + 3 * f(a + h) + 3 * f(a + 2 * h) + f(b))
+    result = (3 * h / 8) * (f(a) + 3 * f(a + h) + 3 * f(a + 2 * h) + f(b))
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'simpsons_38', 'f': f, 'a': a, 'b': b})
 
 
-def gaussian_quadrature_2(f: Callable[[float], float], a: float, b: float) -> float:
+def gaussian_quadrature_2(f: Callable[[float], float], a: float, b: float) -> NumericalResult:
     """
     2-point Gaussian quadrature for numerical integration.
 
@@ -179,10 +186,11 @@ def gaussian_quadrature_2(f: Callable[[float], float], a: float, b: float) -> fl
     t = lambda x: ((b - a) * x + (b + a)) / 2
     w = (b - a) / 2
     x1, x2 = -math.sqrt(1 / 3), math.sqrt(1 / 3)
-    return w * (f(t(x1)) + f(t(x2)))
+    result = w * (f(t(x1)) + f(t(x2)))
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'gaussian_quadrature_2', 'f': f, 'a': a, 'b': b})
 
 
-def gaussian_quadrature_3(f: Callable[[float], float], a: float, b: float) -> float:
+def gaussian_quadrature_3(f: Callable[[float], float], a: float, b: float) -> NumericalResult:
     """
     3-point Gaussian quadrature for numerical integration.
 
@@ -208,4 +216,5 @@ def gaussian_quadrature_3(f: Callable[[float], float], a: float, b: float) -> fl
     w = (b - a) / 2
     x1, x2, x3 = -math.sqrt(3 / 5), 0, math.sqrt(3 / 5)
     w1, w2, w3 = 5 / 9, 8 / 9, 5 / 9
-    return w * (w1 * f(t(x1)) + w2 * f(t(x2)) + w3 * f(t(x3)))
+    result = w * (w1 * f(t(x1)) + w2 * f(t(x2)) + w3 * f(t(x3)))
+    return NumericalResult(result, method_info={'type': 'integration', 'method': 'gaussian_quadrature_3', 'f': f, 'a': a, 'b': b})

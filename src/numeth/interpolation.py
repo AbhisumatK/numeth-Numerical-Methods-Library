@@ -1,7 +1,9 @@
 from typing import List, Tuple
+from .results import NumericalResult
 
 
-def linear_interpolation(points: List[Tuple[float, float]], x: float) -> float:
+
+def linear_interpolation(points: List[Tuple[float, float]], x: float) -> NumericalResult:
     """
     Linear interpolation at point x given list of (x_i, y_i).
 
@@ -31,11 +33,13 @@ def linear_interpolation(points: List[Tuple[float, float]], x: float) -> float:
         if xs[i] <= x <= xs[i + 1]:
             x1, y1 = points[i]
             x2, y2 = points[i + 1]
-            return y1 + (y2 - y1) * (x - x1) / (x2 - x1)
+            result = y1 + (y2 - y1) * (x - x1) / (x2 - x1)
+            f_interp = lambda xi: linear_interpolation(points, xi)
+            return NumericalResult(result, method_info={'type': 'interpolation', 'method': 'linear_interpolation', 'points': points, 'f_interp': f_interp})
     raise ValueError("Interpolation failed")  # Should not reach here
 
 
-def lagrange_interpolation(points: List[Tuple[float, float]], x: float) -> float:
+def lagrange_interpolation(points: List[Tuple[float, float]], x: float) -> NumericalResult:
     """
     Lagrange interpolation at point x given list of (x_i, y_i).
 
@@ -68,10 +72,11 @@ def lagrange_interpolation(points: List[Tuple[float, float]], x: float) -> float
                 xj = points[j][0]
                 term *= (x - xj) / (xi - xj)
         result += term
-    return result
+    f_interp = lambda xi: lagrange_interpolation(points, xi)
+    return NumericalResult(result, method_info={'type': 'interpolation', 'method': 'lagrange_interpolation', 'points': points, 'f_interp': f_interp})
 
 
-def newton_divided_difference(points: List[Tuple[float, float]], x: float) -> float:
+def newton_divided_difference(points: List[Tuple[float, float]], x: float) -> NumericalResult:
     """
     Newton's divided difference interpolation at point x given list of (x_i, y_i).
 
@@ -112,4 +117,5 @@ def newton_divided_difference(points: List[Tuple[float, float]], x: float) -> fl
     for i in range(1, n):
         prod *= x - xs[i - 1]
         result += dd[0][i] * prod
-    return result
+    f_interp = lambda xi: newton_divided_difference(points, xi)
+    return NumericalResult(result, method_info={'type': 'interpolation', 'method': 'newton_divided_difference', 'points': points, 'f_interp': f_interp})

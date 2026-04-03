@@ -1,4 +1,6 @@
 from typing import Callable, Optional, Tuple
+from .results import IterativeResult
+
 
 
 def bisection(
@@ -7,7 +9,7 @@ def bisection(
     b: float,
     tol: float = 1e-6,
     max_iter: int = 100,
-) -> Tuple[float, int, bool]:
+) -> IterativeResult:
     """
     Bisection method for root finding.
 
@@ -36,13 +38,14 @@ def bisection(
     while (b - a) / 2 > tol and iter < max_iter:
         c = (a + b) / 2
         if f(c) == 0:
-            return c, iter, True
+            return IterativeResult(c, iter, True, method_info={'type': 'root_finding', 'method': 'bisection', 'f': f, 'a': a, 'b': b})
         if f(a) * f(c) < 0:
             b = c
         else:
             a = c
         iter += 1
-    return (a + b) / 2, iter, iter < max_iter
+    result = (a + b) / 2
+    return IterativeResult(result, iter, iter < max_iter, method_info={'type': 'root_finding', 'method': 'bisection', 'f': f, 'a': a, 'b': b})
 
 
 def newton_raphson(
@@ -51,7 +54,7 @@ def newton_raphson(
     x0: float = 0.0,
     tol: float = 1e-6,
     max_iter: int = 100,
-) -> Tuple[float, int, bool]:
+) -> IterativeResult:
     """
     Newton-Raphson method for root finding.
 
@@ -85,7 +88,7 @@ def newton_raphson(
             raise ValueError("Derivative is zero")
         x = x - f(x) / dfx
         iter += 1
-    return x, iter, abs(f(x)) <= tol and iter < max_iter
+    return IterativeResult(x, iter, abs(f(x)) <= tol and iter < max_iter, method_info={'type': 'root_finding', 'method': 'newton_raphson', 'f': f, 'x0': x0})
 
 
 def secant(
@@ -94,7 +97,7 @@ def secant(
     x1: float,
     tol: float = 1e-6,
     max_iter: int = 100,
-) -> Tuple[float, int, bool]:
+) -> IterativeResult:
     """
     Secant method for root finding.
 
@@ -123,7 +126,7 @@ def secant(
         x2 = x1 - f(x1) * (x1 - x0) / denom
         x0, x1 = x1, x2
         iter += 1
-    return x1, iter, abs(f(x1)) <= tol and iter < max_iter
+    return IterativeResult(x1, iter, abs(f(x1)) <= tol and iter < max_iter, method_info={'type': 'root_finding', 'method': 'secant', 'f': f, 'x0': x0, 'x1': x1})
 
 
 def false_position(
@@ -132,7 +135,7 @@ def false_position(
     b: float,
     tol: float = 1e-6,
     max_iter: int = 100,
-) -> Tuple[float, int, bool]:
+) -> IterativeResult:
     """
     False position (Regula Falsi) method for root finding.
 
@@ -162,7 +165,7 @@ def false_position(
     while abs(b - a) > tol and iter < max_iter:
         c = b - f(b) * (b - a) / (f(b) - f(a))
         if f(c) == 0:
-            return c, iter, True
+            return IterativeResult(c, iter, True, method_info={'type': 'root_finding', 'method': 'false_position', 'f': f, 'a': a, 'b': b})
         if f(a) * f(c) < 0:
             b = c
         else:
@@ -173,4 +176,4 @@ def false_position(
             c = a
         else:
             c = b
-    return c, iter, iter < max_iter
+    return IterativeResult(c, iter, iter < max_iter, method_info={'type': 'root_finding', 'method': 'false_position', 'f': f, 'a': a, 'b': b})

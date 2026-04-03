@@ -1,9 +1,11 @@
 from typing import Callable, Tuple
+from .results import IterativeResult
+
 
 
 def golden_section_search(
     f: Callable[[float], float], a: float, b: float, tol: float = 1e-6
-) -> Tuple[float, float]:
+) -> IterativeResult:
     """
     Golden section search for minimization in 1D.
 
@@ -36,7 +38,7 @@ def golden_section_search(
         c = b - (b - a) / gr
         d = a + (b - a) / gr
     x_min = (b + a) / 2
-    return x_min, f(x_min)
+    return IterativeResult(x_min, f(x_min), method_info={'type': 'optimization', 'method': 'golden_section_search', 'f': f, 'a': a, 'b': b})
 
 
 def newton_optimization(
@@ -46,7 +48,7 @@ def newton_optimization(
     x0: float,
     tol: float = 1e-6,
     max_iter: int = 100,
-) -> Tuple[float, float, int, bool]:
+) -> IterativeResult:
     """
     Newton's method for optimization in 1D (minimization).
 
@@ -76,4 +78,4 @@ def newton_optimization(
             raise ValueError("Second derivative is zero")
         x = x - df(x) / d2
         iter += 1
-    return x, f(x), iter, abs(df(x)) <= tol and iter < max_iter
+    return IterativeResult(x, f(x), iter, abs(df(x)) <= tol and iter < max_iter, method_info={'type': 'optimization', 'method': 'newton_optimization', 'f': f, 'x0': x0})

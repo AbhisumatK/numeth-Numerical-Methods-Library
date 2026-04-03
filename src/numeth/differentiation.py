@@ -1,7 +1,9 @@
 from typing import Callable
+from .results import NumericalResult
 
 
-def forward_difference(f: Callable[[float], float], x: float, h: float) -> float:
+
+def forward_difference(f: Callable[[float], float], x: float, h: float) -> NumericalResult:
     """
     Forward difference approximation of the first derivative.
 
@@ -22,10 +24,11 @@ def forward_difference(f: Callable[[float], float], x: float, h: float) -> float
     """
     if h <= 0:
         raise ValueError("Step size h must be positive")
-    return (f(x + h) - f(x)) / h
+    result = (f(x + h) - f(x)) / h
+    return NumericalResult(result, method_info={'type': 'differentiation', 'method': 'forward_difference', 'f': f, 'x': x, 'h': h})
 
 
-def backward_difference(f: Callable[[float], float], x: float, h: float) -> float:
+def backward_difference(f: Callable[[float], float], x: float, h: float) -> NumericalResult:
     """
     Backward difference approximation of the first derivative.
 
@@ -46,10 +49,11 @@ def backward_difference(f: Callable[[float], float], x: float, h: float) -> floa
     """
     if h <= 0:
         raise ValueError("Step size h must be positive")
-    return (f(x) - f(x - h)) / h
+    result = (f(x) - f(x - h)) / h
+    return NumericalResult(result, method_info={'type': 'differentiation', 'method': 'backward_difference', 'f': f, 'x': x, 'h': h})
 
 
-def central_difference(f: Callable[[float], float], x: float, h: float) -> float:
+def central_difference(f: Callable[[float], float], x: float, h: float) -> NumericalResult:
     """
     Central difference approximation of the first derivative.
 
@@ -70,10 +74,11 @@ def central_difference(f: Callable[[float], float], x: float, h: float) -> float
     """
     if h <= 0:
         raise ValueError("Step size h must be positive")
-    return (f(x + h) - f(x - h)) / (2 * h)
+    result = (f(x + h) - f(x - h)) / (2 * h)
+    return NumericalResult(result, method_info={'type': 'differentiation', 'method': 'central_difference', 'f': f, 'x': x, 'h': h})
 
 
-def central_second_difference(f: Callable[[float], float], x: float, h: float) -> float:
+def central_second_difference(f: Callable[[float], float], x: float, h: float) -> NumericalResult:
     """
     Central difference approximation of the second derivative.
 
@@ -94,10 +99,11 @@ def central_second_difference(f: Callable[[float], float], x: float, h: float) -
     """
     if h <= 0:
         raise ValueError("Step size h must be positive")
-    return (f(x + h) - 2 * f(x) + f(x - h)) / (h**2)
+    result = (f(x + h) - 2 * f(x) + f(x - h)) / (h**2)
+    return NumericalResult(result, method_info={'type': 'differentiation', 'method': 'central_second_difference', 'f': f, 'x': x, 'h': h})
 
 
-def richardson_extrapolation(f: Callable[[float], float], x: float, h: float) -> float:
+def richardson_extrapolation(f: Callable[[float], float], x: float, h: float) -> NumericalResult:
     """
     Richardson extrapolation for first derivative using central differences.
 
@@ -120,4 +126,5 @@ def richardson_extrapolation(f: Callable[[float], float], x: float, h: float) ->
         raise ValueError("Step size h must be positive")
     d1 = central_difference(f, x, h)
     d2 = central_difference(f, x, h / 2)
-    return (4 * d2 - d1) / 3
+    result = (4 * d2 - d1) / 3
+    return NumericalResult(result, method_info={'type': 'differentiation', 'method': 'richardson_extrapolation', 'f': f, 'x': x, 'h': h})
