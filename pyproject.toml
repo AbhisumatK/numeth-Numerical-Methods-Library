@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "numeth"
-version = "1.1.2"
+version = "1.1.3"
 description = "A set of core numerical methods used in engineering and applied mathematics"
 readme = "README.md"
 authors = [{ name = "Abhisumat Kundu", email = "kunduabhisumat@gmail.com" }]
