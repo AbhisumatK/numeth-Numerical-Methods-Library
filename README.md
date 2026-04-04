@@ -1,6 +1,6 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/AbhisumatK/numeth-Numerical-Methods-Library/main/numeth.jpg" alt="numeth Logo" width="300">
-</p>
+<a href="https://www.producthunt.com/products/numeth?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-numeth" target="_blank" rel="noopener noreferrer"><img alt="numeth - Python package to use numerical method algorithms in 1 line | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1114847&amp;theme=light&amp;t=1775282970787"></a>
 
 [![PyPI version](https://badge.fury.io/py/numeth.svg)](https://badge.fury.io/py/numeth)
 [![PyPI downloads](https://img.shields.io/pypi/dm/numeth.svg)](https://pypistats.org/packages/numeth)
